@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Card Game</string>
+    <string name="instrucoes_string">Instruções</string>
 </resources>
