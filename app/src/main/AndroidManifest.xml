@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Instrucoes"
             android:label="@string/instrucoes_string">
@@ -26,12 +27,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuPrincipal" />
         </activity>
+
         <activity
             android:name=".DeckMenu"
             android:label="Deck Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuPrincipal" />
+        </activity>
+        <activity
+            android:name=".DeckAtual"
+            android:label="@string/title_activity_deck_atual"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--O botao voltar dessa tela deve ser implementado em tempo de execucao-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DeckMenu" />
         </activity>
     </application>
 

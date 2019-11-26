@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Card Game</string>
     <string name="instrucoes_string">Instruções</string>
+    <string name="title_activity_deck_atual">Deck Atual</string>
 </resources>
