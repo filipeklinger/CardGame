@@ -22,7 +22,8 @@ class MenuPrincipal : AppCompatActivity() {
             Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show();
         }
         btnDeck.setOnClickListener {
-            Toast.makeText(this,"Deck...",Toast.LENGTH_LONG).show();
+            val intent = Intent(this,DeckMenu::class.java)
+            startActivity(intent)
         }
         btnInstruc.setOnClickListener {
             val intent = Intent(this,Instrucoes::class.java)
