@@ -6,6 +6,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.si.ufrrj.carta.CartaAdapter
 import br.com.si.ufrrj.carta.singleCard
 import br.com.si.ufrrj.logica.userStatus
@@ -21,17 +23,25 @@ class DeckAtual : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //buscando o ListView em content_deck_atual.xml
-        var deckAtualList = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.deck_atual_list)
+        var deckAtualList = findViewById<RecyclerView>(R.id.deck_atual_list)
 
-        val user:userStatus = userStatus()
-//        val cards:ArrayList<singleCard> = ArrayList()
-//        cards.add(singleCard("Super X"))
-//        cards.add(singleCard("Mega Y"))
-//        //criando um adapter temporario
-//        val adapter = CartaAdapter(this,cards)
+        val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
+        deckAtualList.layoutManager = layoutManager
 
-        //criando um adapter temporario
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, user.deckAtual.toArray())
+        //otimizando list to scrool smootly
+        deckAtualList.setHasFixedSize(true)
+        deckAtualList.setItemViewCacheSize(10)
+
+
+        var user:userStatus = userStatus()
+        var cardsList:ArrayList<singleCard> = ArrayList()
+        cardsList.add(singleCard("Super X"))
+        cardsList.add(singleCard("Mega Y"))
+
+        //criando um adapter
+        //setando na view
+        deckAtualList.adapter = CartaAdapter(this,cardsList)
+
 
 
         fab.setOnClickListener { view ->

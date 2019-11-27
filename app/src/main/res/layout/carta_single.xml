@@ -34,7 +34,7 @@
         <ImageView
             android:id="@+id/card_figure"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:src="@drawable/image_placeholder"
             />
         <TextView
