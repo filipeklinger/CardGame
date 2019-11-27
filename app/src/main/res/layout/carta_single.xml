@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    >
+    <ImageView
+        android:id="@+id/card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/card_background"/>
+    <LinearLayout
+        android:layout_alignTop="@id/card_background"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titulo_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp"
+            android:text="Nome da Carta"
+            android:ellipsize="end"
+            android:singleLine="true"
+            />
+        <ImageView
+            android:id="@+id/card_figure"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/image_placeholder"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:text="Atributos"/>
+        <TextView
+            android:id="@+id/forca_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Força: ---"
+            />
+        <TextView
+            android:id="@+id/velocidade_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Velociadde: --"
+            />
+        <TextView
+            android:id="@+id/inteligencia_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Inteligencia: -----------"
+            />
+        <TextView
+            android:id="@+id/poder_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Poder: ---------"
+            />
+        <TextView
+            android:id="@+id/vigor_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Vigor: --"
+            />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
