@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <!--Color to gradient-->
+    <color name="start">#232526</color>
+    <color name="end">#414345</color>
+
+    <color name="white">#DEE8EC</color>
 </resources>

@@ -27,7 +27,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginBottom="16dp"
-            android:text="Nome da Carta"
+            android:text="@string/ph_card_name"
             android:ellipsize="end"
             android:singleLine="true"
             />
@@ -42,41 +42,42 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"
-            android:text="Atributos"/>
+            android:text="@string/ph_attributes"
+            />
         <TextView
             android:id="@+id/forca_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Força: ---"
+            android:text="@string/ph_strength"
             />
         <TextView
             android:id="@+id/velocidade_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Velociadde: --"
+            android:text="@string/ph_speed"
             />
         <TextView
             android:id="@+id/inteligencia_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Inteligencia: -----------"
+            android:text="@string/ph_knowlodge"
             />
         <TextView
             android:id="@+id/poder_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Poder: ---------"
+            android:text="@string/ph_pwr"
             />
         <TextView
             android:id="@+id/vigor_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Vigor: --"
+            android:text="@string/ph_health"
             />
 
     </LinearLayout>

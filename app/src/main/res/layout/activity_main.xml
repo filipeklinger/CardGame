@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/gradiente"
     tools:context=".MenuPrincipal">
 
     <TextView
@@ -14,16 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        android:text="Bem Vindo"
+        android:text="@string/app_name"
+        android:fontFamily="@font/funsized"
+        android:textColor="@color/white"
         android:textSize="40sp" />
-
-    <Button
-        android:id="@+id/jogar_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:text="JOGAR" />
 
     <Button
         android:id="@+id/deck_btn"
@@ -31,7 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        android:text="DECK" />
+        android:text="@string/m_deck" />
+
+    <Button
+        android:id="@+id/jogar_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:text="@string/m_jogar" />
 
     <Button
         android:id="@+id/instrucoes_btn"

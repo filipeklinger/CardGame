@@ -1,5 +1,22 @@
 <resources>
-    <string name="app_name">Card Game</string>
+    <string name="app_name">Hero Wars</string>
     <string name="instrucoes_string">Instruções</string>
     <string name="title_activity_deck_atual">Deck Atual</string>
+
+
+    <!--Placeholder pra deixar meu android studio mais calmo-->
+    <string name="ph_card_name">Nome do Personagem</string>
+    <string name="ph_attributes">Atributos</string>
+    <string name="ph_pwr">Força: ___ </string>
+    <string name="ph_speed">Velociadde: ___ </string>
+    <string name="ph_knowlodge">Inteligencia: ___ </string>
+    <string name="ph_strength">Poder: ___ </string>
+    <string name="ph_health">Vigor: ___ </string>
+
+    <!--Menu Main-->
+    <string name="m_jogar">Jogar</string>
+    <string name="m_instructions">Instuções</string>
+    <string name="m_deck">Coleção</string>
 </resources>
+
+
