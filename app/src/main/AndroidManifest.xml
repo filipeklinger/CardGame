@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.si.ufrrj">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".CartasDisponiveis"></activity>
         <activity android:name=".MenuPrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Instrucoes"
             android:label="@string/instrucoes_string">
@@ -27,7 +28,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuPrincipal" />
         </activity>
-
         <activity
             android:name=".DeckMenu"
             android:label="Deck Menu">
@@ -39,7 +39,8 @@
             android:name=".DeckAtual"
             android:label="@string/title_activity_deck_atual"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--O botao voltar dessa tela deve ser implementado em tempo de execucao-->
+
+            <!-- O botao voltar dessa tela deve ser implementado em tempo de execucao -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DeckMenu" />

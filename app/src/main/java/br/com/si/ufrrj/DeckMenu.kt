@@ -12,12 +12,18 @@ class DeckMenu : AppCompatActivity() {
         setContentView(R.layout.activity_deck_menu)
 
         var btnCartas = findViewById<Button>(R.id.deck_cartas_btn)
-        var btnDeckAtual = findViewById<Button>(R.id.deck_atual_btn)
+        btnCartas.setOnClickListener{
+            val intent = Intent(this,CartasDisponiveis::class.java)
+            startActivity(intent)
+        }
 
+
+        var btnDeckAtual = findViewById<Button>(R.id.deck_atual_btn)
         btnDeckAtual.setOnClickListener{
             val intent = Intent(this,DeckAtual::class.java)
             startActivity(intent)
         }
+
 
     }
 }

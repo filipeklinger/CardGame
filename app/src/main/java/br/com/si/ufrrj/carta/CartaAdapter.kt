@@ -18,13 +18,24 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //aqui vamos associar os ids em carta_single com variaveis da nossa classe
-        val titulo = itemView.findViewById<TextView>(R.id.titulo_card)
-        //TODO pegar os outros atributos
-        //val figure = itemView.findViewById<ImageView>(R.id.card_figure)
+        private val titulo: TextView = itemView.findViewById(R.id.titulo_card)
+        private val inteligencia: TextView = itemView.findViewById(R.id.inteligencia_card)
+        private val forca: TextView = itemView.findViewById(R.id.forca_card)
+        private val velocidade: TextView = itemView.findViewById(R.id.velocidade_card)
+        private val vigor: TextView = itemView.findViewById(R.id.vigor_card)
+        private val poder: TextView = itemView.findViewById(R.id.poder_card)
+        private val combate: TextView = itemView.findViewById(R.id.combate_card)
+
 
         fun bindView(card: singleCard){
             //obtendo a carta da visualizacao atual
             titulo.text = card.nome
+            inteligencia.text = "Inte: ${card.inteligencia}"
+            forca.text = "Forç: ${card.forca}"
+            velocidade.text = "Velo: ${card.velocidade}"
+            vigor.text = "Vigo: ${card.vigor}"
+            poder.text = "Pode: ${card.poder}"
+            combate.text = "Comb: ${card.combate}"
         }
 
     }
