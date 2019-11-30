@@ -66,12 +66,24 @@ class SplashScreen : AppCompatActivity() {
      * Busca o json referente a cada Id armazenado
      */
     fun initParseStringsJson(){
-        textoFeedback?.text = "Iniciando Parse JSON...."
-        parseMultiThread()
+        textoFeedback?.text = "Extraindo dados"
+        parseBackThread()
+
+        //verificando se o download concluiu a cada 1 segundo
+        //as vezes o inicia game nao funciona dentro de parse =(
+        GlobalScope.async {
+            while (true){
+                delay(1000)
+                if(cartasBaixadas.empty()){
+                    iniciaGame()
+                    break
+                }
+            }
+        }
     }
 
 
-    fun parseMultiThread(){
+    fun parseBackThread(){
         // Start a coroutine
         GlobalScope.async {
             var usr = UserStatus
@@ -81,6 +93,7 @@ class SplashScreen : AppCompatActivity() {
                 var singleCard = apiConect.parseResponse(strcard)
                 usr.deckAtual.add(singleCard)
             }
+            println("Parse finalizado")
             textoFeedback?.text = "Iniciando game"
             iniciaGame()
         }
@@ -89,5 +102,6 @@ class SplashScreen : AppCompatActivity() {
     fun iniciaGame(){
         val intent = Intent(baseContext,MenuPrincipal::class.java)
         startActivity(intent)
+        finish()
     }
 }

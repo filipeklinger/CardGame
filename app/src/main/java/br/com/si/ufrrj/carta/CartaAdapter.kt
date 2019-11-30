@@ -17,7 +17,7 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
     //essa inner class implementa o tipo abstrato ViewHolder para ser utilizado no Adapter
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //aqui vamos associar os ids em carta_single com variaveis da nossa classe
+        //aqui vamos associar os ids em carta_single com as variaveis da nossa classe
         private val titulo: TextView = itemView.findViewById(R.id.titulo_card)
         private val inteligencia: TextView = itemView.findViewById(R.id.inteligencia_card)
         private val forca: TextView = itemView.findViewById(R.id.forca_card)
