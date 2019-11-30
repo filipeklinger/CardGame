@@ -26,14 +26,19 @@ class apiConect(var context: Context){
         fun parseResponse(json: String): singleCard{
             var rootObj = JSONObject(json)
             return if(rootObj.getString("response") == "success"){
-                val nome = rootObj.getString("name")
+                val nome = rootObj.getString("name")?: "0"
                 val card = singleCard(nome)
-                card.inteligencia = rootObj.getInt("intelligence")
-                card.forca  = rootObj.getInt("strength")
-                card.velocidade = rootObj.getInt("speed")
-                card.vigor = rootObj.getInt("durability")
-                card.poder = rootObj.getInt("power")
-                card.combate = rootObj.getInt("combat")
+                try{
+                    card.inteligencia = rootObj.getString("intelligence")?: "0"
+                    card.forca  = rootObj.getString("strength")?: "0"
+                    card.velocidade = rootObj.getString("speed")?: "0"
+                    card.vigor = rootObj.getString("durability")?: "0"
+                    card.poder = rootObj.getString("power")?: "0"
+                    card.combate = rootObj.getString("combat")?: "0"
+                }catch (e:Exception){
+
+                }
+
                 card
             }else{
                 singleCard("Err")
@@ -41,14 +46,9 @@ class apiConect(var context: Context){
         }
     }
 
-    fun buscarId(id: Int, myCallback: (result: String?) -> Unit){
-        Log.d(tag,"Init busca id ${id}")
-        makeRequest(apiBase + "${id}/powerstats",myCallback)
-    }
 
-
-
-    fun makeRequest(url:String, callback: (result: String?) -> Unit){
+    fun buscarId(id: Int, callback: (result: String?) -> Unit){
+        var url = apiBase + "${id}/powerstats"
 
         // Volley request
         val request = JsonObjectRequest(

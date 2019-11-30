@@ -20,6 +20,7 @@ class MenuPrincipal : AppCompatActivity() {
 
         btnJogar.setOnClickListener {
             Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Ainda nao implementado...",Toast.LENGTH_LONG).show();
         }
         btnDeck.setOnClickListener {
             val intent = Intent(this,DeckMenu::class.java)
