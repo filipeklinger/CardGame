@@ -1,7 +1,9 @@
 package br.com.si.ufrrj
 
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +19,6 @@ class DeckAtual : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deck_atual)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //buscando o ListView em content_deck_atual.xml
 
@@ -33,11 +33,21 @@ class DeckAtual : AppCompatActivity() {
 
         deckAtualList?.adapter = CartaAdapter(this,UserStatus.deckAtual)
 
-
+        mostraQtd()
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Ainda não é possivel adicionar cartas", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            if(UserStatus.deckAtual.size == 10){
+                val snack = Snackbar.make(view, "Não é possivel adicionar mais cartas", Snackbar.LENGTH_LONG)
+                snack.setAction("Action", null)
+                // snackbar background color
+                snack.view.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                snack.show()
+            }
         }
+    }
+
+    fun mostraQtd(){
+        var qtdTv = findViewById<TextView>(R.id.deck_atual_qtd_cartas)
+        qtdTv.text = "${UserStatus.deckAtual.size} / 10"
     }
 }

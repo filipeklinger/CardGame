@@ -43,11 +43,6 @@
             android:name=".DeckAtual"
             android:label="@string/title_activity_deck_atual"
             android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- O botao voltar dessa tela deve ser implementado em tempo de execucao -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DeckMenu" />
         </activity>
     </application>
 
