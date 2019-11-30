@@ -26,9 +26,10 @@ class apiConect(var context: Context){
         fun parseResponse(json: String): singleCard{
             var rootObj = JSONObject(json)
             return if(rootObj.getString("response") == "success"){
-                val nome = rootObj.getString("name")?: "0"
+                val nome = rootObj.getString("name")?: "Err:p"
                 val card = singleCard(nome)
                 try{
+                    card.id = rootObj.getInt("id")
                     card.inteligencia = rootObj.getString("intelligence")?: "0"
                     card.forca  = rootObj.getString("strength")?: "0"
                     card.velocidade = rootObj.getString("speed")?: "0"

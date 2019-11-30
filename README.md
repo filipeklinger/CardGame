@@ -13,7 +13,7 @@ Aplicativo Android Desenvolvido em Kotlin
 - [X] Instruções
 - [ ] Deck
   - [ ] Cartas disponiveis
-  - [ ] Deck Atual
+  - [X] Deck Atual
 - [ ] Jogar
   - [ ] Nova Partida
 
@@ -21,6 +21,6 @@ Aplicativo Android Desenvolvido em Kotlin
 
 - [ ] Deck
   - [ ] Cartas disponiveis
-  - [ ] Deck Atual
+  - [X] Deck Atual
 - [ ] Jogar
   - [ ] Nova Partida

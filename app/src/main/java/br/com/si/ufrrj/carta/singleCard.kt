@@ -1,6 +1,7 @@
 package br.com.si.ufrrj.carta
 
 class singleCard(var nome: String) {
+    var id:Int = 0
     val defaltValue = "10"
     var figura:String = ""
 

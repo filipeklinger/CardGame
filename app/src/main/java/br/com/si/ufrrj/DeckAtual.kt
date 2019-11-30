@@ -31,37 +31,6 @@ class DeckAtual : AppCompatActivity() {
         deckAtualList.setHasFixedSize(true)
         deckAtualList.setItemViewCacheSize(10)
 
-
-//        var statusUser = UserStatus
-//        var deckNumber:ArrayList<Int> = statusUser.deckAtual
-//
-//        var cardsList:ArrayList<singleCard> = ArrayList()
-//        //buscando cards com API
-//        var api =  apiConect(this)
-//
-//        //obtendo instancia do parser em background
-//        var parseApi = ParseApiString(cardsList,deckAtualList)
-//
-//        //percorrendo os ids armazenados
-//        deckNumber.iterator().forEach { idBusca ->
-//            //para cada Id uma basca na API
-//            println("Id recebido: $idBusca")
-//        }
-//        api.buscarId(70){
-//                parseApi.execute(it)
-//        }
-
-
-
-
-
-
-//        cardsList.add(singleCard("Super X"))
-//        cardsList.add(singleCard("Mega Y"))
-
-        //criando um adapter
-        //setando na view
-
         deckAtualList?.adapter = CartaAdapter(this,UserStatus.deckAtual)
 
 

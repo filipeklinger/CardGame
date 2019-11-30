@@ -13,25 +13,28 @@ object UserStatus {
 
     //aqui armazenamos os cards completos exceto pela foto que deve ser um link a ser carregado
     var cartasDisponiveis:ArrayList<singleCard>
+    get() {
+        if(field.size == 0){
+            field.addAll(deckAtual)//se nao temos cartas disponiveis entao copiamos o deck atual
+        }
+        return field
+    }
     var deckAtual:ArrayList<singleCard>
 
     //aqui temos somente as referencias das cartas na API
-    var cartasDisponiveisId:ArrayList<Int>
     var deckAtualId:ArrayList<Int>
 
     init {
         //inicializando user status
         cartasDisponiveis = ArrayList()
         deckAtual = ArrayList()
-        cartasDisponiveisId = ArrayList()
         deckAtualId = ArrayList()
 
 
         //TODO Essa verificacao vai passar bela busca em banco de dados
         //verificando se o jogador iniciou agora e atribuindo as referencias
         if(deckAtual.size == 0 && cartasDisponiveis.size == 0){
-            cartasDisponiveisId = this.deckInicial()
-            deckAtualId = cartasDisponiveisId
+            deckAtualId = this.deckInicial()
         }
     }
 

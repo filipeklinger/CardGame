@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="310dp"
     android:layout_height="500dp"
-    android:paddingRight="10dp"
+    android:paddingEnd="2dp"
     android:background="@android:color/black"
     >
     <ImageView
         android:id="@+id/card_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/card_background"/>
     <LinearLayout
         android:layout_alignTop="@id/card_background"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,7 +26,7 @@
             android:id="@+id/titulo_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginBottom="16dp"
@@ -35,7 +37,9 @@
         <ImageView
             android:id="@+id/card_figure"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
             android:src="@drawable/image_placeholder"
             />
         <TextView
@@ -77,14 +81,14 @@
             android:id="@+id/vigor_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/ph_health"
             />
         <TextView
             android:id="@+id/combate_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:text="Combate:"
             />
 
