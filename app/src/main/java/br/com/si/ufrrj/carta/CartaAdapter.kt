@@ -4,19 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.si.ufrrj.R
 
+
 //construtor primario recebe uma lista de singleCard e o contexto em que foi chamado
 //implementa a classe abstrata Adapter do tipo ViewHolder
-class CartaAdapter(private val context:Context,private val cartaList: ArrayList<singleCard>) : Adapter<CartaAdapter.ViewHolder>(){
+class CartaAdapter(private val context:Context,private val cartaList: ArrayList<singleCard>) : Adapter<CartaAdapter.ViewHolder>() {
+
+    var childClickListener: OnChildClickListener? = null
 
     //essa inner class implementa o tipo abstrato ViewHolder para ser utilizado no Adapter
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View,childClickListener: OnChildClickListener?) : RecyclerView.ViewHolder(itemView) {
         //aqui vamos associar os ids em carta_single com as variaveis da nossa classe
         private val titulo: TextView = itemView.findViewById(R.id.titulo_card)
         private val inteligencia: TextView = itemView.findViewById(R.id.inteligencia_card)
@@ -26,8 +28,16 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
         private val poder: TextView = itemView.findViewById(R.id.poder_card)
         private val combate: TextView = itemView.findViewById(R.id.combate_card)
 
+        private val addOrRemoveButton: ImageButton = itemView.findViewById(R.id.add_or_remove_card)
 
-        fun bindView(card: singleCard){
+        init {
+            addOrRemoveButton.setOnClickListener {
+                childClickListener?.onChildClick(it,layoutPosition,adapterPosition,0)
+
+            }
+        }
+
+        fun bindView(card: singleCard) {
             //obtendo a carta da visualizacao atual
             titulo.text = card.nome
             inteligencia.text = "Inte: ${card.inteligencia}"
@@ -50,7 +60,8 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //inflando o layout criado em carta single dentro do ReciclerView
         val view = LayoutInflater.from(context).inflate(R.layout.carta_single, parent, false)
-        return ViewHolder(view)
+        //passando a view e o listenner criado
+        return ViewHolder(view,childClickListener)
     }
 
     /**
@@ -61,4 +72,28 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
         holder.bindView(cartaList[position])
     }
 
+    fun setChildClickListenner(clickListener: OnChildClickListener) {
+        this.childClickListener = clickListener
+    }
+
+
+    interface OnChildClickListener {
+        /**
+         * Callback method to be invoked when a child in this expandable list has
+         * been clicked.
+         *
+         * @param v The view within the expandable list/ListView that was clicked
+         * @param groupPosition The group position that contains the child that
+         * was clicked
+         * @param childPosition The child position within the group
+         * @param id The row id of the child that was clicked
+         * @return True if the click was handled
+         */
+        fun onChildClick(
+            v: View?,
+            groupPosition: Int,
+            childPosition: Int,
+            id: Long
+        ): Boolean
+    }
 }
