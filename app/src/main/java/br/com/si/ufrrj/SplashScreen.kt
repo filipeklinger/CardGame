@@ -95,7 +95,6 @@ class SplashScreen : AppCompatActivity() {
             }
             println("Parse finalizado")
             textoFeedback?.text = "Iniciando game"
-            iniciaGame()
         }
     }
 
