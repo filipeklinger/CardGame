@@ -47,9 +47,9 @@ object UserStatus {
     private fun deckInicial(): ArrayList<Int> {
         //deve ser um random variando de 1 a 731
         var deck:ArrayList<Int> = ArrayList()
-        for(i in 0..9){
+        while(deck.size < 10){
             var cartaAtual = Random.nextInt(731)
-            deck.add(cartaAtual)
+            if(!deck.contains(cartaAtual)) deck.add(cartaAtual) //somente adiciona cartas nao repetidas
         }
         return deck
     }
