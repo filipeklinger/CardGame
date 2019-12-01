@@ -1,6 +1,8 @@
 package br.com.si.ufrrj
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +37,15 @@ class CartasDisponiveis : AppCompatActivity() {
         cartasDisponiveisList.setHasFixedSize(true)
         cartasDisponiveisList.setItemViewCacheSize(10)
 
-        cartasDisponiveisList?.adapter = CartaAdapter(this, UserStatus.cartasDisponiveis)
+        val adapter = CartaAdapter(this, UserStatus.cartasDisponiveis)
+        adapter.childClickListener = (object : CartaAdapter.OnChildClickListener{
+            override fun onChildClick(v: View?, groupPosition: Int, childPosition: Int, id: Long): Boolean {
+                Toast.makeText(baseContext,"Clicado",Toast.LENGTH_SHORT).show()
+                return true
+            }
+        })
+
+        cartasDisponiveisList?.adapter = adapter
 
 
     }

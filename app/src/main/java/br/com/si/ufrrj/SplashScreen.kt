@@ -74,7 +74,7 @@ class SplashScreen : AppCompatActivity() {
         GlobalScope.async {
             while (true){
                 delay(1000)
-                if(cartasBaixadas.empty()){
+                if(cartasBaixadas.empty()){//como é uma pilha assim que estiver vazia é pq o job acabou
                     iniciaGame()
                     break
                 }
@@ -89,11 +89,10 @@ class SplashScreen : AppCompatActivity() {
             var usr = UserStatus
             while (cartasBaixadas.isNotEmpty()){
                 var strcard = cartasBaixadas.pop()
-                println(strcard)
                 var singleCard = apiConect.parseResponse(strcard)
                 usr.deckAtual.add(singleCard)
+                usr.cartasDisponiveis.add(singleCard)
             }
-            println("Parse finalizado")
             textoFeedback?.text = "Iniciando game"
         }
     }

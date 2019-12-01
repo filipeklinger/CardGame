@@ -20,7 +20,7 @@
         android:layout_alignParentEnd="true"
         android:background="@android:color/transparent"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_remove_card"/>
+        android:src="@drawable/ic_add_card"/>
     <LinearLayout
         android:layout_alignTop="@id/card_background"
         android:gravity="center"

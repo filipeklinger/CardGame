@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.si.ufrrj.R
+import br.com.si.ufrrj.logica.UserStatus
 
 
 //construtor primario recebe uma lista de singleCard e o contexto em que foi chamado
@@ -46,6 +47,10 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
             vigor.text = "Vigo: ${card.vigor}"
             poder.text = "Pode: ${card.poder}"
             combate.text = "Comb: ${card.combate}"
+
+            if(UserStatus.deckAtual.contains(card)){//verificando se o card atual esta contido em deck
+                addOrRemoveButton.setImageResource(R.drawable.ic_remove_card)
+            }
         }
 
     }
