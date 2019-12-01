@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".DeckAtual">
     <LinearLayout
+        android:id="@+id/deck_atual_header"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:background="#FFF"
@@ -30,10 +31,11 @@
     </LinearLayout>
 
     <include
-        android:layout_marginTop="40dp"
+        android:id="@+id/include"
+        layout="@layout/content_deck_atual"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/content_deck_atual" />
+        android:layout_marginTop="40dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -19,6 +19,7 @@ import br.com.si.ufrrj.logica.apiConect
 import br.com.si.ufrrj.logica.UserStatus
 
 import kotlinx.android.synthetic.main.activity_deck_atual.*
+import kotlinx.android.synthetic.main.activity_deck_atual.view.*
 
 class DeckAtual : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,16 @@ class DeckAtual : AppCompatActivity() {
 
         //buscando o ReciclerView em content_deck_atual.xml
         var deckAtualList = findViewById<RecyclerView>(R.id.deck_atual_list)
+
+
+
+        criaVisualizacao(deckAtualList)
+        mostraQtd()
+        botaoFlutuante()
+
+    }
+
+    fun criaVisualizacao(deckAtualList: RecyclerView){
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         deckAtualList.layoutManager = layoutManager
         //otimizando list to scrool smootly
@@ -35,11 +46,11 @@ class DeckAtual : AppCompatActivity() {
         //inserindo dados na lista
         var adapter = CartaAdapter(this,UserStatus.deckAtual)
 
-        //implementacao anonima do click listener para criar um toast
+        //implementacao anonima do click listener para remover carta
         adapter.childClickListener = (object : OnChildClickListener {
             override fun onChildClick(v: View?, groupPosition: Int, childPosition: Int, id: Long): Boolean {
                 val singleCard:singleCard = UserStatus.deckAtual.removeAt(childPosition)
-                Toast.makeText(baseContext,"Removido ${singleCard.nome}",Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext,"Removido ${singleCard.nome}",Toast.LENGTH_SHORT).show()
                 adapter.notifyDataSetChanged()
                 mostraQtd()
                 return true
@@ -47,10 +58,25 @@ class DeckAtual : AppCompatActivity() {
         })
 
         deckAtualList?.adapter = adapter
+    }
 
+    fun mostraQtd(){
+        var qtdTv = findViewById<TextView>(R.id.deck_atual_qtd_cartas)
+        qtdTv.text = "${UserStatus.deckAtual.size} / 10"
 
-        mostraQtd()
+        var emptyView = findViewById<TextView>(R.id.empty_view)
+        var recyclerView = findViewById<RecyclerView>(R.id.deck_atual_list)
 
+        if(UserStatus.deckAtual.size == 0){
+            emptyView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        }else{
+            emptyView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
+    }
+
+    fun botaoFlutuante(){
         fab.setOnClickListener { view ->
             if(UserStatus.deckAtual.size >= 10){
                 val snack = Snackbar.make(view, "Não é possivel adicionar mais cartas", Snackbar.LENGTH_LONG)
@@ -63,10 +89,5 @@ class DeckAtual : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-    }
-
-    fun mostraQtd(){
-        var qtdTv = findViewById<TextView>(R.id.deck_atual_qtd_cartas)
-        qtdTv.text = "${UserStatus.deckAtual.size} / 10"
     }
 }
