@@ -17,7 +17,14 @@ class CartasDisponiveis : AppCompatActivity() {
         setContentView(R.layout.activity_cartas_disponiveis)
 
         var cartasDisponiveisList = findViewById<RecyclerView>(R.id.cartas_disponiveis_list)
+        criaVisualizacao(cartasDisponiveisList)
+        val adapter = CartaAdapter(this, UserStatus.cartasDisponiveis)
 
+        addOrRemoveListenner(adapter)
+        cartasDisponiveisList?.adapter = adapter
+    }
+
+    fun criaVisualizacao(cardList: RecyclerView){
         //customized GridLayoutManager
         var gridLayoutManager = object : GridLayoutManager(this, 2) {
             override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean { // force size of viewHolder here, this will override layout_height and layout_width from xml
@@ -31,22 +38,34 @@ class CartasDisponiveis : AppCompatActivity() {
             }
         }
 
-        cartasDisponiveisList.layoutManager = gridLayoutManager//layoutManager
+        cardList.layoutManager = gridLayoutManager//layoutManager
 
         //otimizando list to scrool smootly
-        cartasDisponiveisList.setHasFixedSize(true)
-        cartasDisponiveisList.setItemViewCacheSize(10)
+        cardList.setHasFixedSize(true)
+        cardList.setItemViewCacheSize(10)
+    }
 
-        val adapter = CartaAdapter(this, UserStatus.cartasDisponiveis)
+    /**
+     * Logica de adicao de cartas ao Deck jogavel
+     */
+    fun addOrRemoveListenner(adapter: CartaAdapter){
         adapter.childClickListener = (object : CartaAdapter.OnChildClickListener{
             override fun onChildClick(v: View?, groupPosition: Int, childPosition: Int, id: Long): Boolean {
-                Toast.makeText(baseContext,"Clicado",Toast.LENGTH_SHORT).show()
+                val singleCard = UserStatus.cartasDisponiveis[childPosition]
+                val deckAtual = UserStatus.deckAtual
+
+                if(deckAtual.contains(singleCard)){
+                    Toast.makeText(baseContext,"Essa carta já esta em seu Deck",Toast.LENGTH_SHORT).show()
+                }else{
+                    if(deckAtual.size < 10){
+                        deckAtual.add(singleCard)
+                        adapter.notifyDataSetChanged()
+                    }else{
+                        Toast.makeText(baseContext,"Deck cheio",Toast.LENGTH_SHORT).show()
+                    }
+                }
                 return true
             }
         })
-
-        cartasDisponiveisList?.adapter = adapter
-
-
     }
 }

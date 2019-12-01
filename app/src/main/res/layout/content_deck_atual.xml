@@ -23,6 +23,6 @@
         android:gravity="center"
         android:padding="16dp"
         android:visibility="gone"
-        android:text="Nnenhuma Carta por aqui" />
+        android:text="Nenhuma Carta por aqui" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

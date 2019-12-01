@@ -22,19 +22,12 @@ import kotlinx.android.synthetic.main.activity_deck_atual.*
 import kotlinx.android.synthetic.main.activity_deck_atual.view.*
 
 class DeckAtual : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deck_atual)
-
-        //buscando o ReciclerView em content_deck_atual.xml
-        var deckAtualList = findViewById<RecyclerView>(R.id.deck_atual_list)
-
-
-
-        criaVisualizacao(deckAtualList)
-        mostraQtd()
+        
         botaoFlutuante()
-
     }
 
     fun criaVisualizacao(deckAtualList: RecyclerView){
@@ -57,7 +50,16 @@ class DeckAtual : AppCompatActivity() {
             }
         })
 
-        deckAtualList?.adapter = adapter
+        deckAtualList.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //buscando o ReciclerView em content_deck_atual.xml
+        val deckAtualList = findViewById<RecyclerView>(R.id.deck_atual_list)
+        criaVisualizacao(deckAtualList)
+        mostraQtd()
+
     }
 
     fun mostraQtd(){
