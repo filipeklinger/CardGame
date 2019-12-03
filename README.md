@@ -11,16 +11,16 @@ Aplicativo Android Desenvolvido em Kotlin
 #### View
 
 - [X] Instruções
-- [ ] Deck
-  - [ ] Cartas disponiveis
+- [X] Deck
+  - [X] Cartas disponiveis
   - [X] Deck Atual
 - [ ] Jogar
   - [ ] Nova Partida
 
 #### Controler/Logica
 
-- [ ] Deck
-  - [ ] Cartas disponiveis
+- [X] Deck
+  - [X] Cartas disponiveis
   - [X] Deck Atual
 - [ ] Jogar
   - [ ] Nova Partida
