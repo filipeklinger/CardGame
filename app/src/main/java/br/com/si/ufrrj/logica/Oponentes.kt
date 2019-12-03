@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 //gera cards aleatorios para 2 oponentes
 class Oponentes(var context: Context) {
-    private val game = GameStatus.getPartida()
+    private val game:GameStatus
 
     private val op1sharedCounterLock = Semaphore(1)
     private val op2sharedCounterLock = Semaphore(1)
@@ -20,27 +20,21 @@ class Oponentes(var context: Context) {
     private var cartasBaixadasOp2: Stack<String> = Stack()
 
     private val tag = "Oponentes.class"
+    init {
+        GameStatus.terminaPartida() //certificando que nao temos nenhuma partida em aberto
+        game = GameStatus.getPartida()
+    }
 
     fun gerar() {
-        //contactando API
-        Log.d(tag,"Contactando API")
-        val apiConect = ApiConect(context)
-        //selecionando cartas do oponente 1
-        //inicializando Oponente 1
-        Log.d(tag,"Iniciando Oponente 1")
-        val op1 = deckAleatorio()
-        Log.d(tag,"Deck Oponente 1: ${op1.joinToString(",")}")
+        val apiConect = ApiConect(context)//contactando API
+
+        val op1 = deckAleatorio();/*selecionando cartas do oponente 1*/ Log.d(tag,"Deck Oponente 1: ${op1.joinToString(",")}")//Log do deck
         op1.forEach { id -> apiConect.buscarId(id){//para cada id busca na API
                 jsonString -> armazenaJsonCardOp1(jsonString)//para cada resposta um parse
         } }
 
-        Log.d(tag,"Iniciando Oponente 2")
-        val op2 = deckAleatorio()
-        Log.d(tag,"Deck Oponente 2: ${op2.joinToString(",")}")
-        op2.forEach { id -> apiConect.buscarId(id){//para cada id busca na API
-                jsonString -> armazenaJsonCardOp2(jsonString)//para cada resposta um parse
-        } }
-
+        val op2 = deckAleatorio();Log.d(tag,"Deck Oponente 2: ${op2.joinToString(",")}")//Log do deck
+        op2.forEach { id -> apiConect.buscarId(id){ jsonString -> armazenaJsonCardOp2(jsonString)} }//mesmo do op1 sem comentarios
     }
 
     /**
@@ -52,7 +46,7 @@ class Oponentes(var context: Context) {
         val deck:ArrayList<Int> = ArrayList()
         while(deck.size < game.qtdCartasOponente){
             val cartaAtual = Random.nextInt(731)
-            if(!deck.contains(cartaAtual)) deck.add(cartaAtual) //somente adiciona cartas nao repetidas
+            if(!deck.contains(cartaAtual) && cartaAtual > 0) deck.add(cartaAtual) //somente adiciona cartas nao repetidas
         }
         return deck
     }
@@ -66,22 +60,36 @@ class Oponentes(var context: Context) {
         try {
             op1sharedCounterLock.acquire()
             jsonString?.let { it -> cartasBaixadasOp1.push(it) }
-            if(cartasBaixadasOp1.size == game.qtdCartasOponente){ parseBackThread(1) }//quando chegamos na decima carta inicializa parse
+            if(cartasBaixadasOp1.size == game.qtdCartasOponente){
+                Log.d(tag,"Cartas baixadas op 1: ${cartasBaixadasOp1.size}")
+                parseBackThread(1)
+            }//quando chegamos na ultima carta inicializa parse
         } finally {
             op1sharedCounterLock.release()
         }
     }
 
+    /**
+     * Precisei implementar outra funcao igual para nao entrar em conflito com o semaforo do card 1
+     */
     fun armazenaJsonCardOp2(jsonString: String?){
         try {
             op2sharedCounterLock.acquire()
             jsonString?.let { it -> cartasBaixadasOp2.push(it) }
-            if(cartasBaixadasOp2.size == game.qtdCartasOponente){ parseBackThread(2) }//quando chegamos na decima carta inicializa parse
+            if(cartasBaixadasOp2.size == game.qtdCartasOponente){
+                Log.d(tag,"Cartas baixadas op 2: ${cartasBaixadasOp2.size}")
+                parseBackThread(2)
+            }//quando chegamos na ultima carta inicializa parse
         } finally {
             op2sharedCounterLock.release()
         }
     }
 
+
+    /**
+     * Aqui usamos a mesma funcao para fazer parse dos 2 oponentes simultaneamente
+     * como no val de cada um passamos ponteiros diferentes não ha problema
+     */
     fun parseBackThread(oponente: Int){
         Log.d(tag,"Parse Oponente ${oponente}")
         // Start a coroutine
@@ -93,9 +101,9 @@ class Oponentes(var context: Context) {
                 val strcard = cartasBaixadas.pop()
                 val singleCard = ApiConect.parseResponse(strcard)
                 deck.add(singleCard)
-                deck.add(singleCard)
             }
             Log.d(tag,"Parse Oponente ${oponente} finalizado")
+            Log.d(tag,"Deck do Op ${oponente} com ${deck.size}")
         }
     }
 }

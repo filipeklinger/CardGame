@@ -3,6 +3,8 @@ package br.com.si.ufrrj.gamePlay
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.si.ufrrj.R
 import br.com.si.ufrrj.logica.GameStatus
@@ -29,23 +31,25 @@ class LoadGame : AppCompatActivity() {
         //criando oponentes
         val oponentes = Oponentes(this)
         oponentes.gerar()
-        progresso()
+        progresso(textoLoadgame)
     }
 
-    fun progresso(){
+    fun progresso(textView: TextView){
         val game = GameStatus.getPartida()
+        val progressBar = findViewById<ProgressBar>(R.id.progress_load_game)
+        progressBar.max = game.qtdCartasOponente * 2 //2 oponentes
+        progressBar.isIndeterminate = false
+
         GlobalScope.async {
             while (true){
-                delay(3000)
-                if(game.cartasOponente1.size == game.qtdCartasOponente){//como é uma pilha assim que estiver vazia é pq o job acabou
-                    var text = "Finalizado" + "\nOponente:\n Op1: ${game.cartasOponente1.size} / ${game.qtdCartasOponente}\nOp2: ${game.cartasOponente2.size} / ${game.qtdCartasOponente}"
-                    Log.d("Load Game","Finalizado")
+                delay(200)
+                if(game.cartasOponente1.size >= game.qtdCartasOponente){//como é uma pilha assim que estiver vazia é pq o job acabou
+                    textView.text = "Finalizado"
+                    progressBar.visibility = View.INVISIBLE
                     break
                 }else{
-                    var text = "Buscando Oponente:\n Op1: ${game.cartasOponente1.size} / ${game.qtdCartasOponente}\nOp2: ${game.cartasOponente2.size} / ${game.qtdCartasOponente}"
+                    progressBar.progress = game.cartasOponente1.size + game.cartasOponente2.size
                 }
-                Log.d("Load Game","Cards Oponente 1 ${game.cartasOponente1.size}")
-                Log.d("Load Game","Cards Oponente 2 ${game.cartasOponente2.size}")
             }
         }
     }
