@@ -50,6 +50,8 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
 
             if(UserStatus.deckAtual.contains(card)){//verificando se o card atual esta contido em deck
                 addOrRemoveButton.setImageResource(R.drawable.ic_remove_card)
+            }else{
+                addOrRemoveButton.setImageResource(R.drawable.ic_add_card)
             }
         }
 

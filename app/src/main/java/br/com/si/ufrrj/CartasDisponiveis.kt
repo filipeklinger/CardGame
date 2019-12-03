@@ -53,17 +53,23 @@ class CartasDisponiveis : AppCompatActivity() {
             override fun onChildClick(v: View?, groupPosition: Int, childPosition: Int, id: Long): Boolean {
                 val singleCard = UserStatus.cartasDisponiveis[childPosition]
                 val deckAtual = UserStatus.deckAtual
+                var msg = ""
 
                 if(deckAtual.contains(singleCard)){
-                    Toast.makeText(baseContext,"Essa carta já esta em seu Deck",Toast.LENGTH_SHORT).show()
+                    var indice  = deckAtual.indexOf(singleCard)//as vezes a remocao por comparacao de objetos falha por isso pegamos o indice
+                    deckAtual.removeAt(indice)
+                    adapter.notifyDataSetChanged()
+                    msg = "${singleCard.nome} Removido do deck"
                 }else{
                     if(deckAtual.size < 10){
                         deckAtual.add(singleCard)
                         adapter.notifyDataSetChanged()
+                        msg = "${singleCard.nome} Adicionado ao deck"
                     }else{
-                        Toast.makeText(baseContext,"Deck cheio",Toast.LENGTH_SHORT).show()
+                        msg = "Deck cheio"
                     }
                 }
+                Toast.makeText(baseContext,msg,Toast.LENGTH_SHORT).show()
                 return true
             }
         })
