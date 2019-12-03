@@ -10,7 +10,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
 import kotlinx.coroutines.*
 
-class apiConect(var context: Context){
+class ApiConect(var context: Context){
     //Aqui vamos armazenar as credenciais e criar as coneccoes necessarias para uso da API
     private val token = "1625416087590258"
     private val apiBase = "https://superheroapi.com/api/${token}/"

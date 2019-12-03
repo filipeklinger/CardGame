@@ -2,10 +2,8 @@ package br.com.si.ufrrj
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
@@ -15,11 +13,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.si.ufrrj.carta.CartaAdapter
 import br.com.si.ufrrj.carta.CartaAdapter.OnChildClickListener
 import br.com.si.ufrrj.carta.singleCard
-import br.com.si.ufrrj.logica.apiConect
 import br.com.si.ufrrj.logica.UserStatus
 
 import kotlinx.android.synthetic.main.activity_deck_atual.*
-import kotlinx.android.synthetic.main.activity_deck_atual.view.*
 
 class DeckAtual : AppCompatActivity() {
 

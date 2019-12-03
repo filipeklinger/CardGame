@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import br.com.si.ufrrj.gamePlay.LoadGame
 
 class MenuPrincipal : AppCompatActivity() {
 
@@ -19,8 +20,9 @@ class MenuPrincipal : AppCompatActivity() {
         //setando os clicaveis do botao
 
         btnJogar.setOnClickListener {
-            Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show();
-            Toast.makeText(this,"Ainda nao implementado...",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show()
+            val intent = Intent(this,LoadGame::class.java)
+            startActivity(intent)
         }
         btnDeck.setOnClickListener {
             val intent = Intent(this,DeckMenu::class.java)

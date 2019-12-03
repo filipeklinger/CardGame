@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import br.com.si.ufrrj.logica.UserStatus
-import br.com.si.ufrrj.logica.apiConect
+import br.com.si.ufrrj.logica.ApiConect
 import kotlinx.coroutines.*
 import java.util.*
 import java.util.concurrent.Semaphore
@@ -29,7 +29,7 @@ class SplashScreen : AppCompatActivity() {
             var usuario = UserStatus
             var refDeckAtual = usuario.deckAtualId
             //buscando as 10 ref do deck atual
-            var apiConect = apiConect(this)
+            var apiConect = ApiConect(this)
             textoFeedback?.text = "Baixando Cartas"
             refDeckAtual.forEach { idCard ->
                 apiConect.buscarId(idCard){
@@ -89,7 +89,7 @@ class SplashScreen : AppCompatActivity() {
             var usr = UserStatus
             while (cartasBaixadas.isNotEmpty()){
                 var strcard = cartasBaixadas.pop()
-                var singleCard = apiConect.parseResponse(strcard)
+                var singleCard = ApiConect.parseResponse(strcard)
                 usr.deckAtual.add(singleCard)
                 usr.cartasDisponiveis.add(singleCard)
             }
