@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.si.ufrrj">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".gamePlay.LoadGame"></activity>
+        <activity
+            android:name=".gamePlay.jogando"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_jogando"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".gamePlay.LoadGame" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -24,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CartasDisponiveis" />
-        <activity android:name=".MenuPrincipal"></activity>
+        <activity android:name=".MenuPrincipal" />
         <activity
             android:name=".Instrucoes"
             android:label="@string/instrucoes_string">
@@ -42,7 +48,7 @@
         <activity
             android:name=".DeckAtual"
             android:label="@string/title_activity_deck_atual"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

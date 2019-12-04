@@ -17,6 +17,10 @@
     <string name="m_jogar">Jogar</string>
     <string name="m_instructions">Instuções</string>
     <string name="m_deck">Coleção</string>
+
+    <string name="title_activity_jogando">jogando</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
 
 

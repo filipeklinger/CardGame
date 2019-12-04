@@ -1,19 +1,24 @@
 package br.com.si.ufrrj
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import br.com.si.ufrrj.logica.UserStatus
 import br.com.si.ufrrj.logica.ApiConect
 import kotlinx.coroutines.*
 import java.util.*
 import java.util.concurrent.Semaphore
+import kotlin.collections.ArrayList
 
 class SplashScreen : AppCompatActivity() {
     var cartasBaixadas: Stack<String> = Stack()
     var textoFeedback: TextView? = null
-    private val sharedCounterLock = Semaphore(1)
+    private val semaforo = Semaphore(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +33,11 @@ class SplashScreen : AppCompatActivity() {
             //Iniciando status do usuario
             var usuario = UserStatus
             var refDeckAtual = usuario.deckAtualId
-            //buscando as 10 ref do deck atual
-            var apiConect = ApiConect(this)
-            textoFeedback?.text = "Baixando Cartas"
-            refDeckAtual.forEach { idCard ->
-                apiConect.buscarId(idCard){
-                armazenaJsonCards(it)
-            } }
+            val sucesso = buscaNaApi(refDeckAtual)
+            if(!sucesso) textoFeedback?.text = "Ops! parece que não temos internet"
+
+        }else{
+            textoFeedback?.text = "Ops! parece que não temos internet"
         }
 
     }
@@ -44,7 +47,26 @@ class SplashScreen : AppCompatActivity() {
      */
     fun temInternet(): Boolean {
         textoFeedback?.text = "Verificando Conexao"
-        return true
+        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isWiFi: Boolean = activeNetwork?.type == ConnectivityManager.TYPE_WIFI
+        if(!isWiFi){ Toast.makeText(this,"Recomendamos jogar com Wifi",Toast.LENGTH_SHORT).show() }
+        return activeNetwork?.isConnectedOrConnecting == true
+    }
+
+    fun buscaNaApi(refDeckAtual:ArrayList<Int>):Boolean{
+        var sucesso:Boolean = true
+        //buscando as ref do deck atual na API
+        val apiConect = ApiConect(this)
+        textoFeedback?.text = "Baixando Cartas"
+        refDeckAtual.forEach { idCard ->
+            apiConect.buscarId(idCard){
+                if(it == "-1") sucesso = false
+                empilhaJsonCard(it)
+            }
+            if(!sucesso) return false //esse return vai para quem chamou a funcao buscaNaApi
+        }
+        return sucesso
     }
 
     /**
@@ -52,13 +74,14 @@ class SplashScreen : AppCompatActivity() {
      * Deve ser sincronizado por usar multiplos threads dinamicamente enquanto baixa os arquivos
      * Usando semaforos para isso
      */
-    fun armazenaJsonCards(jsonString: String?){
+    fun empilhaJsonCard(jsonString: String?){
+
         try {
-            sharedCounterLock.acquire()
+            semaforo.acquire()
             jsonString?.let { it -> cartasBaixadas.push(it) }
             if(cartasBaixadas.size == 10){ initParseStringsJson() }//quando chegamos na decima carta inicializa parse
         } finally {
-            sharedCounterLock.release()
+            semaforo.release()
         }
     }
 
@@ -67,13 +90,13 @@ class SplashScreen : AppCompatActivity() {
      */
     fun initParseStringsJson(){
         textoFeedback?.text = "Extraindo dados"
+
         parseBackThread()
 
-        //verificando se o download concluiu a cada 1 segundo
-        //as vezes o inicia game nao funciona dentro de parse =(
+        //verificando se o download concluiu a cada 0.8 segundo
         GlobalScope.async {
             while (true){
-                delay(1000)
+                delay(800)
                 if(cartasBaixadas.empty()){//como é uma pilha assim que estiver vazia é pq o job acabou
                     iniciaGame()
                     break

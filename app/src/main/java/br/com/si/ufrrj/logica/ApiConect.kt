@@ -49,7 +49,7 @@ class ApiConect(var context: Context){
 
 
     fun buscarId(id: Int, callback: (result: String?) -> Unit){
-        var url = apiBase + "${id}/powerstats"
+        val url = apiBase + "${id}/powerstats"
 
         // Volley request
         val request = JsonObjectRequest(
@@ -59,10 +59,12 @@ class ApiConect(var context: Context){
                     callback.invoke(response.toString())
                 }catch (e:Exception){
                     Log.d(tag,"Erro ${e}!!")
+                    callback.invoke("-1")
                 }
             }, Response.ErrorListener{
                 // Error in request
                 Log.d(tag,"Resposta ERRO!!")
+                callback.invoke("-1")
             })
 
         // Volley request policy, only one time request to avoid duplicate transaction
