@@ -48,7 +48,7 @@ class LoadGame : AppCompatActivity() {
                     progressBar.visibility = View.INVISIBLE
                     break
                 }else{
-                    progressBar.progress = game.cartasOponente1.size + game.cartasOponente2.size
+                    progressBar.progress = (game.cartasOponente1.size + game.cartasOponente2.size)
                 }
             }
         }
