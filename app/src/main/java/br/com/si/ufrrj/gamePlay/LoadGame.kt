@@ -1,8 +1,9 @@
 package br.com.si.ufrrj.gamePlay
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,9 +16,13 @@ import kotlinx.coroutines.delay
 
 
 class LoadGame : AppCompatActivity() {
+    var mContext: Context? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load_game)
+        //fazendo um bind do contexto atual
+        mContext = this
         //1 Gerar Oponentes
         //TODO 2 embaralhar deck do jogador
         //TODO Criar pilha de cartas ganhadoras e cartas perdedoras
@@ -31,10 +36,10 @@ class LoadGame : AppCompatActivity() {
         //criando oponentes
         val oponentes = Oponentes(this)
         oponentes.gerar()
-        progresso(textoLoadgame)
+        progresso()
     }
 
-    fun progresso(textView: TextView){
+    fun progresso(){
         val game = GameStatus.getPartida()
         val progressBar = findViewById<ProgressBar>(R.id.progress_load_game)
         progressBar.max = game.qtdCartasOponente * 2 //2 oponentes
@@ -43,14 +48,17 @@ class LoadGame : AppCompatActivity() {
         GlobalScope.async {
             while (true){
                 delay(200)
-                if(game.cartasOponente1.size >= game.qtdCartasOponente){//como é uma pilha assim que estiver vazia é pq o job acabou
-                    textView.text = "Finalizado"
-                    progressBar.visibility = View.INVISIBLE
+                if(game.cartasOponente1.size >= game.qtdCartasOponente && game.cartasOponente2.size >= game.qtdCartasOponente){//como é uma pilha assim que estiver vazia é pq o job acabou
+                    startGamePlay()
                     break
-                }else{
-                    progressBar.progress = (game.cartasOponente1.size + game.cartasOponente2.size)
                 }
             }
         }
+    }
+
+    fun startGamePlay(){
+        val intent = Intent(mContext, Jogando::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import br.com.si.ufrrj.R
+import br.com.si.ufrrj.logica.GameStatus
+import br.com.si.ufrrj.logica.UserStatus
 import kotlinx.android.synthetic.main.activity_jogando.*
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class jogando : AppCompatActivity() {
+class Jogando : AppCompatActivity() {
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -60,7 +64,38 @@ class jogando : AppCompatActivity() {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        dummy_button.setOnTouchListener(mDelayHideTouchListener)
+        game_over_btn.setOnTouchListener(mDelayHideTouchListener)
+        game_over_btn.setOnClickListener {
+            encerrarPartida()
+        }
+
+        var viewOp1 = findViewById<TextView>(R.id.cards_oponente_1)
+        var viewOp2 = findViewById<TextView>(R.id.cards_oponente_2)
+
+        //buscando cartas do Oponente
+        var gs = GameStatus.getPartida()
+
+        var cardsOp1 = ""
+        gs.cartasOponente1.forEach { c -> cardsOp1 += c.nome +"\n" }
+        viewOp1.text = cardsOp1
+
+        var cardsOp2 = ""
+        gs.cartasOponente2.forEach { c -> cardsOp2 += c.nome +"\n" }
+        viewOp2.text = cardsOp2
+
+        //Buscando cards do Jogador
+        var cardsJog = ""
+        var viewJog = findViewById<TextView>(R.id.cards_jogador)
+        UserStatus.deckAtual.forEach { c -> cardsJog += c.nome +"\n" }
+        viewJog.text = cardsJog
+
+
+    }
+
+    fun encerrarPartida(){
+        Toast.makeText(baseContext,"Encerrando Partida",Toast.LENGTH_SHORT).show()
+        GameStatus.terminaPartida()
+        finish()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -123,7 +158,7 @@ class jogando : AppCompatActivity() {
          * If [AUTO_HIDE] is set, the number of milliseconds to wait after
          * user interaction before hiding the system UI.
          */
-        private val AUTO_HIDE_DELAY_MILLIS = 3000
+        private val AUTO_HIDE_DELAY_MILLIS = 2000
 
         /**
          * Some older devices needs a small delay between UI widget updates

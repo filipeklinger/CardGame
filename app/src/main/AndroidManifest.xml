@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".gamePlay.jogando"
+            android:name=".gamePlay.Jogando"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_jogando"
             android:theme="@style/FullscreenTheme"></activity>

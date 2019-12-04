@@ -4,21 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
-    tools:context=".gamePlay.jogando">
+    tools:context=".gamePlay.Jogando">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView
+    <RelativeLayout
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:keepScreenOn="true"
+        android:padding="16dp"
         android:text="Hoho,pegadinha do malandro"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        >
+        <TextView
+            android:id="@+id/label_oponente_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oponente 1 cartas:"/>
+        <TextView
+            android:id="@+id/cards_oponente_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label_oponente_1"
+            android:layout_marginTop="5dp"
+            android:text="A, B, C"/>
+        <TextView
+            android:id="@+id/label_oponente_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Oponente 2 Cartas"/>
+        <TextView
+            android:id="@+id/cards_oponente_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/label_oponente_2"
+            android:layout_alignParentEnd="true"
+            android:text="A, B, C"/>
+
+        <TextView
+            android:id="@+id/label_jogador_cards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Minhas cartas"/>
+        <TextView
+            android:id="@+id/cards_jogador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/label_jogador_cards"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="A, B, C"/>
+    </RelativeLayout>
+
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -38,12 +80,12 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/dummy_button"
+                android:id="@+id/game_over_btn"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Botão idiota" />
+                android:text="Encerrar Partida" />
 
         </LinearLayout>
     </FrameLayout>
