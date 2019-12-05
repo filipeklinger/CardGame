@@ -23,13 +23,16 @@ class GameStatus {
 
     var qtdCartasOponente:Int = 5
 
+    val pontosVitoria:Int = 10
+    val pontosEmpate:Int = 5
+
     var pontuacaoJogador:Int = 0 //cada carta ganha vale X pontos a serem definidos
     var pontuacaoOp1:Int = 0
     var pontuacaoOp2:Int = 0
 
     //cartas
-    var cartasOponente1: ArrayList<singleCard> = ArrayList()
-    var cartasOponente2: ArrayList<singleCard> = ArrayList()
+    var cartasOponente1: Stack<singleCard> = Stack()
+    var cartasOponente2: Stack<singleCard> = Stack()
 
     companion object {
         @Volatile

@@ -3,21 +3,16 @@ package br.com.si.ufrrj.gamePlay
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import br.com.si.ufrrj.R
 import br.com.si.ufrrj.carta.singleCard
 import br.com.si.ufrrj.logica.GameStatus
-import br.com.si.ufrrj.logica.UserStatus
 import kotlinx.android.synthetic.main.activity_jogando.*
 import kotlinx.android.synthetic.main.carta_single.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import java.util.*
-import kotlin.concurrent.schedule
+import kotlin.reflect.KProperty1
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -88,22 +83,54 @@ class Jogando : AppCompatActivity() {
         card_principal.animation = AnimationUtils.loadAnimation(this,R.anim.lefttoright)
         //obtendo a primeira carta da pilha
         if(!gameStatus.cardsJogador.empty()){
-            if(gameStatus.cardsJogador.size == 1) Toast.makeText(baseContext,"Ultima carta",Toast.LENGTH_LONG).show()
+            //if(gameStatus.cardsJogador.size == 1) Toast.makeText(baseContext,"Ultima carta",Toast.LENGTH_LONG).show()
             val card = gameStatus.cardsJogador.pop()
 
             //setando os atributos do card atual para visao do usuario
             titulo_card.text = card.nome
 
             inteligencia_card.text = "Inteligencia: ${card.inteligencia}"
+            inteligencia_card.background = getDrawable(R.color.colorAccent)
+            inteligencia_card.setOnClickListener{
+                Log.d("JOGANDO.class","inteligencia")
+                comparar(card,singleCard::inteligencia)
+            }
 
             forca_card.text = "Força: ${card.forca}"
+            forca_card.background = getDrawable(R.color.colorAccent)
             forca_card.setOnClickListener{
-                comparar(card,"forca")
+                Log.d("JOGANDO.class","Forca")
+                comparar(card,singleCard::forca)
             }
+
             velocidade_card.text = "Velocidade: ${card.velocidade}"
+            velocidade_card.background = getDrawable(R.color.colorAccent)
+            velocidade_card.setOnClickListener{
+                Log.d("JOGANDO.class","Velocidade")
+                comparar(card,singleCard::velocidade)
+            }
+
             vigor_card.text = "Vigor: ${card.vigor}"
+            vigor_card.background = getDrawable(R.color.colorAccent)
+            vigor_card.setOnClickListener{
+                Log.d("JOGANDO.class","vigor")
+                comparar(card,singleCard::vigor)
+            }
+
             poder_card.text = "Poder: ${card.poder}"
+            poder_card.background = getDrawable(R.color.colorAccent)
+            poder_card.setOnClickListener{
+                Log.d("JOGANDO.class","poder")
+                comparar(card,singleCard::poder)
+            }
+
             combate_card.text = "Combate: ${card.combate}"
+            combate_card.background = getDrawable(R.color.colorAccent)
+            combate_card.setOnClickListener{
+                Log.d("JOGANDO.class","Combate")
+                comparar(card,singleCard::combate)
+            }
+
         }else{
             card_principal.visibility = View.GONE
             game_over_text.visibility = View.VISIBLE
@@ -111,20 +138,71 @@ class Jogando : AppCompatActivity() {
 
     }
 
-    fun comparar(card:singleCard,atributo:String){
+    fun comparar(jogadorCard:singleCard, atributo: KProperty1<singleCard, *>){
+        //--------Fluxo principal------------
         //compara com todos os jogadores
-        //coloca na pilha de ganohu ou perdeu
-        //atualiza pontuacao de todos os jogadores
         //mostra quem ganhou
+        //coloca a carta do jogador na pilha de ganhou ou perdeu
+        //atualiza pontuacao de todos os jogadores
         //mostra proxima carta
 
         //comparando com jogador 1
+        val gs = GameStatus.getPartida()
+        val oponente1Card = gs.cartasOponente1.pop()
+        val oponente2Card = gs.cartasOponente2.pop()
 
+        //Obtendo o atributo a ser comparado por referencia de propriedade Platonica
+        //mais info em https://kotlinlang.org/docs/tutorials/kotlin-for-py/member-references-and-reflection.html
+        var atribOp1 = atributo.get(oponente1Card) // o problema é que aqui retorna Any (qualquer coisa)
+        var atribOp2 =  atributo.get(oponente2Card)
+        var atribJogador =  atributo.get(jogadorCard)
 
+        if(atribOp1 !is String || atribOp2 !is String || atribJogador !is String){ //Por compatibilidade com API os atributos sao String
+            Toast.makeText(baseContext,"Atributo ERR =((",Toast.LENGTH_LONG).show()
+            return
+        }
 
-//         Handler().postDelayed({
-//                    mostraCarta()
-//                }, 1000)
+        //comparando atributos
+        if( atribJogador > atribOp1){
+            //ganhou do oponente 1
+            if(atribJogador > atribOp2){
+                //ganhou do oponente 2
+                Toast.makeText(baseContext,"Sua carta Ganhou de TODOS!!",Toast.LENGTH_LONG).show()
+                gs.pontuacaoJogador += gs.pontosVitoria
+            }
+        }else if( atribJogador == atribOp1 && atribJogador != 100){
+            //empatou com jogador 1 vamos ver qual oponente ganha
+
+            if( atribOp1 < atribOp2){ //como OP1 == Jogador entao OP2 ganha
+                Toast.makeText(baseContext,"Oponente 2 Ganhou de TODOS!!",Toast.LENGTH_LONG).show()
+                gs.pontuacaoOp2 += gs.pontosVitoria
+            }else{
+                Toast.makeText(baseContext,"Sua carta Empatou com Oponente 1!!",Toast.LENGTH_LONG).show()
+                gs.pontuacaoOp1 += gs.pontosEmpate
+                gs.pontuacaoJogador += gs.pontosEmpate
+            }
+        }else{
+            if(atribOp1 > atribOp2){
+                Toast.makeText(baseContext,"Oponente 1 Ganhou de TODOS,o card dele tem: ${atribOp1}!!",Toast.LENGTH_LONG).show()
+                gs.pontuacaoOp1 += gs.pontosVitoria
+            }else{
+                Toast.makeText(baseContext,"Opoente 2 Ganhou de todos, o card dele tem: ${atribOp2}!!",Toast.LENGTH_LONG).show()
+                gs.pontuacaoOp2 += gs.pontosVitoria
+            }
+        }
+
+        //atualizando na view
+        atualizaPontuacao()
+        //mostrando proximo card
+        mostraCarta()
+
+    }
+
+    fun atualizaPontuacao(){
+        val gs = GameStatus.getPartida()
+        pontos_oponente_1.text = gs.pontuacaoOp1.toString()
+        pontos_oponente_2.text = gs.pontuacaoOp2.toString()
+        pontos_jogador.text = gs.pontuacaoJogador.toString()
     }
 
     fun encerrarPartida(){

@@ -19,7 +19,7 @@ class Oponentes(var context: Context) {
     private var cartasBaixadasOp1: Stack<String> = Stack()
     private var cartasBaixadasOp2: Stack<String> = Stack()
 
-    private val tag = "Oponentes.class"
+    private val tag = "Oponentes.class"//Tag para debug Log
     init {
         GameStatus.terminaPartida() //certificando que nao temos nenhuma partida em aberto
         game = GameStatus.getPartida()
@@ -94,7 +94,7 @@ class Oponentes(var context: Context) {
         Log.d(tag,"Parse Oponente ${oponente}")
         // Start a coroutine
         GlobalScope.async {
-            val deck:ArrayList<singleCard> = if(oponente == 1){ game.cartasOponente1}else{ game.cartasOponente2 }
+            val deck:Stack<singleCard> = if(oponente == 1){ game.cartasOponente1}else{ game.cartasOponente2 }
             val cartasBaixadas:Stack<String> = if(oponente == 1){ cartasBaixadasOp1 }else{ cartasBaixadasOp2 }
 
             while (cartasBaixadas.isNotEmpty()){

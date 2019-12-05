@@ -18,23 +18,13 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/text_vez_de"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Sua Vez"
-            android:textColor="@android:color/white"
-            android:textSize="55sp"
-            android:visibility="gone" />
-
-        <TextView
             android:id="@+id/label_oponente_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Oponente 1:" />
 
         <TextView
-            android:id="@+id/cards_oponente_1"
+            android:id="@+id/pontos_oponente_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -46,11 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/cards_oponente_2"
+            android:layout_toLeftOf="@+id/pontos_oponente_2"
             android:text="Oponente 2:" />
 
         <TextView
-            android:id="@+id/cards_oponente_2"
+            android:id="@+id/pontos_oponente_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -83,7 +73,7 @@
             android:text="Jogador:" />
 
         <TextView
-            android:id="@+id/jogador_pts"
+            android:id="@+id/pontos_jogador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
