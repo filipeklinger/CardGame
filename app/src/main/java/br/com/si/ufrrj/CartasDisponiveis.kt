@@ -1,12 +1,12 @@
 package br.com.si.ufrrj
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.si.ufrrj.carta.CardItemDecoration
 import br.com.si.ufrrj.carta.CartaAdapter
 import br.com.si.ufrrj.logica.UserStatus
 
@@ -41,8 +41,10 @@ class CartasDisponiveis : AppCompatActivity() {
         cardList.setItemViewCacheSize(5)
 
         //criando padding para cada child
-        cardList.addItemDecoration(MarginItemDecoration(
-            resources.getDimension(R.dimen.default_padding).toInt()))
+        cardList.addItemDecoration(
+            CardItemDecoration(
+            resources.getDimension(R.dimen.default_padding).toInt())
+        )
     }
 
     /**
@@ -73,19 +75,5 @@ class CartasDisponiveis : AppCompatActivity() {
                 return true
             }
         })
-    }
-}
-
-class MarginItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(outRect: Rect, view: View,
-                                parent: RecyclerView, state: RecyclerView.State) {
-        with(outRect) {
-            if (parent.getChildAdapterPosition(view) == 0) {
-                top = spaceHeight
-            }
-            left =  spaceHeight
-            right = spaceHeight
-            bottom = spaceHeight
-        }
     }
 }
