@@ -4,12 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import br.com.si.ufrrj.R
+import br.com.si.ufrrj.carta.singleCard
 import br.com.si.ufrrj.logica.GameStatus
 import br.com.si.ufrrj.logica.UserStatus
 import kotlinx.android.synthetic.main.activity_jogando.*
+import kotlinx.android.synthetic.main.carta_single.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import java.util.*
+import kotlin.concurrent.schedule
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -69,27 +77,54 @@ class Jogando : AppCompatActivity() {
             encerrarPartida()
         }
 
-        var viewOp1 = findViewById<TextView>(R.id.cards_oponente_1)
-        var viewOp2 = findViewById<TextView>(R.id.cards_oponente_2)
+        mostraCarta()
+    }
 
-        //buscando cartas do Oponente
-        var gs = GameStatus.getPartida()
+    fun mostraCarta(){
+        val gameStatus = GameStatus.getPartida()
+        //primeiro removendo esse botao q nao tem nada a ver aparecer aqui
+        add_or_remove_card.visibility = View.GONE
 
-        var cardsOp1 = ""
-        gs.cartasOponente1.forEach { c -> cardsOp1 += c.nome +"\n" }
-        viewOp1.text = cardsOp1
+        card_principal.animation = AnimationUtils.loadAnimation(this,R.anim.lefttoright)
+        //obtendo a primeira carta da pilha
+        if(!gameStatus.cardsJogador.empty()){
+            if(gameStatus.cardsJogador.size == 1) Toast.makeText(baseContext,"Ultima carta",Toast.LENGTH_LONG).show()
+            val card = gameStatus.cardsJogador.pop()
 
-        var cardsOp2 = ""
-        gs.cartasOponente2.forEach { c -> cardsOp2 += c.nome +"\n" }
-        viewOp2.text = cardsOp2
+            //setando os atributos do card atual para visao do usuario
+            titulo_card.text = card.nome
 
-        //Buscando cards do Jogador
-        var cardsJog = ""
-        var viewJog = findViewById<TextView>(R.id.cards_jogador)
-        UserStatus.deckAtual.forEach { c -> cardsJog += c.nome +"\n" }
-        viewJog.text = cardsJog
+            inteligencia_card.text = "Inteligencia: ${card.inteligencia}"
+
+            forca_card.text = "Força: ${card.forca}"
+            forca_card.setOnClickListener{
+                comparar(card,"forca")
+            }
+            velocidade_card.text = "Velocidade: ${card.velocidade}"
+            vigor_card.text = "Vigor: ${card.vigor}"
+            poder_card.text = "Poder: ${card.poder}"
+            combate_card.text = "Combate: ${card.combate}"
+        }else{
+            card_principal.visibility = View.GONE
+            game_over_text.visibility = View.VISIBLE
+        }
+
+    }
+
+    fun comparar(card:singleCard,atributo:String){
+        //compara com todos os jogadores
+        //coloca na pilha de ganohu ou perdeu
+        //atualiza pontuacao de todos os jogadores
+        //mostra quem ganhou
+        //mostra proxima carta
+
+        //comparando com jogador 1
 
 
+
+//         Handler().postDelayed({
+//                    mostraCarta()
+//                }, 1000)
     }
 
     fun encerrarPartida(){

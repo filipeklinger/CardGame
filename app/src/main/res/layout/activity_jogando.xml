@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameplay_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
@@ -14,51 +15,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:keepScreenOn="true"
-        android:padding="16dp"
-        android:text="Hoho,pegadinha do malandro"
-        >
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_vez_de"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Sua Vez"
+            android:textColor="@android:color/white"
+            android:textSize="55sp"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/label_oponente_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Oponente 1 cartas:"/>
+            android:text="Oponente 1:" />
+
         <TextView
             android:id="@+id/cards_oponente_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label_oponente_1"
-            android:layout_marginTop="5dp"
-            android:text="A, B, C"/>
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/label_oponente_1"
+            android:text="0" />
+
         <TextView
             android:id="@+id/label_oponente_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Oponente 2 Cartas"/>
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/cards_oponente_2"
+            android:text="Oponente 2:" />
+
         <TextView
             android:id="@+id/cards_oponente_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/label_oponente_2"
             android:layout_alignParentEnd="true"
-            android:text="A, B, C"/>
+            android:text="0" />
 
-        <TextView
-            android:id="@+id/label_jogador_cards"
+        <include
+            android:id="@+id/card_principal"
+            layout="@layout/carta_single"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Minhas cartas"/>
+            android:layout_margin="50dp" />
+
         <TextView
-            android:id="@+id/cards_jogador"
+            android:id="@+id/game_over_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/label_jogador_cards"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/funsized"
+            android:text="Fim de Jogo"
+            android:textSize="35sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/label_jogador_pts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="A, B, C"/>
+            android:text="Jogador:" />
+
+        <TextView
+            android:id="@+id/jogador_pts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/label_jogador_pts"
+            android:text="0" />
     </RelativeLayout>
 
 
@@ -83,10 +114,10 @@
                 android:id="@+id/game_over_btn"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
-                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Encerrar Partida" />
+                android:text="Encerrar Partida"
+                android:textColor="@color/colorAccent" />
 
         </LinearLayout>
     </FrameLayout>

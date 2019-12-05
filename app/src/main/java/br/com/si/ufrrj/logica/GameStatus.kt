@@ -2,6 +2,8 @@ package br.com.si.ufrrj.logica
 
 import android.content.Context
 import br.com.si.ufrrj.carta.singleCard
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 /**
@@ -11,6 +13,13 @@ class GameStatus {
     var cartasGanharam: ArrayList<singleCard> = ArrayList() /* cartas do opopnente que ganharam */
     var cartasPerderam: ArrayList<singleCard> = ArrayList() /* cartas do oponente que perderam */
     var cartasEmpataram: ArrayList<singleCard> = ArrayList() /* cartas do oponente que perderam */
+
+    var cardsJogador:Stack<singleCard> = Stack()
+
+    init {
+        //ao iniciar obtemos o deck atual e colocamos na pilha do jogador (stack)
+        cardsJogador.addAll(UserStatus.deckAtual)
+    }
 
     var qtdCartasOponente:Int = 5
 

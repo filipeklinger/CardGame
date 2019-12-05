@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
             android:text="@string/ph_strength"
             />
         <TextView
@@ -74,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
             android:text="@string/ph_speed"
             />
         <TextView
@@ -81,12 +83,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
             android:text="@string/ph_knowlodge"
             />
         <TextView
             android:id="@+id/poder_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:layout_marginBottom="10dp"
             android:text="@string/ph_pwr"
             />
@@ -94,6 +98,7 @@
             android:id="@+id/vigor_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:layout_marginBottom="10dp"
             android:text="@string/ph_health"
             />
@@ -101,6 +106,7 @@
             android:id="@+id/combate_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:layout_marginBottom="10dp"
             android:text="Combate:"
             />

@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FFFFFF</color>
 
+    <color name="gamePlay">#0099cc</color>
+
 
     <!--Color to gradient-->
     <color name="start">#232526</color>
