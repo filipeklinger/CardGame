@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/gradiente"
     tools:context=".Instrucoes">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,36 +15,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="25sp"
             android:text="Objetivo"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textColor="@android:color/white"
             android:text="Ganhar todas as cartas do seu adversário."/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="25sp"
             android:text="O JOGO"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textColor="@android:color/white"
             android:text="O jogo baseia-se na comparação dos valores de sua carta com a dos outros jogadores. Para sua carta vencer, a característica escolhida precisa ter valor maior ou menor (em alguns casos) do que a carta dos seus adversários."/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="25sp"
             android:text="Placar"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textColor="@android:color/white"
             android:text="O placar mostra o número de cartas que você e seus adversários possuem. O placar vai se alterando automaticamente a cada rodada. Em caso de empate as cartas ficam no monte e um placar mostra quantas cartas estão lá. Quando um jogador vencer a próxima rodada, ele ganha todas as cartas do monte."/>
 
 
