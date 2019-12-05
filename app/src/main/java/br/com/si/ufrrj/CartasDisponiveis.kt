@@ -1,5 +1,6 @@
 package br.com.si.ufrrj
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -28,20 +29,20 @@ class CartasDisponiveis : AppCompatActivity() {
         //customized GridLayoutManager
         var gridLayoutManager = object : GridLayoutManager(this, 2) {
             override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean { // force size of viewHolder here, this will override layout_height and layout_width from xml
-                lp.height = height / spanCount
-                lp.width = width / spanCount
-                lp.bottomMargin = 10
-                lp.marginEnd = 1
-                lp.marginStart = 1
-                lp.layoutDirection = HORIZONTAL
+                lp.height = (height / spanCount)
+                lp.width =  (width / spanCount) - 60
                 return true
             }
         }
 
-        cardList.layoutManager = gridLayoutManager//layoutManager
+        cardList.layoutManager = gridLayoutManager //layoutManager
 
         //otimizando list to scrool smootly
         cardList.setItemViewCacheSize(5)
+
+        //criando padding para cada child
+        cardList.addItemDecoration(MarginItemDecoration(
+            resources.getDimension(R.dimen.default_padding).toInt()))
     }
 
     /**
@@ -72,5 +73,19 @@ class CartasDisponiveis : AppCompatActivity() {
                 return true
             }
         })
+    }
+}
+
+class MarginItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(outRect: Rect, view: View,
+                                parent: RecyclerView, state: RecyclerView.State) {
+        with(outRect) {
+            if (parent.getChildAdapterPosition(view) == 0) {
+                top = spaceHeight
+            }
+            left =  spaceHeight
+            right = spaceHeight
+            bottom = spaceHeight
+        }
     }
 }

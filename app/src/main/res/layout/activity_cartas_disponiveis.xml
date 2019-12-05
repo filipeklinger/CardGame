@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:background="@drawable/gradiente"
+        android:background="@android:color/holo_blue_dark"
         android:padding="10dp"
         />
 
