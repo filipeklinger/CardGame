@@ -41,8 +41,7 @@ class CartasDisponiveis : AppCompatActivity() {
         cardList.layoutManager = gridLayoutManager//layoutManager
 
         //otimizando list to scrool smootly
-        cardList.setHasFixedSize(true)
-        cardList.setItemViewCacheSize(10)
+        cardList.setItemViewCacheSize(5)
     }
 
     /**

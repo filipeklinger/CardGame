@@ -83,6 +83,7 @@
                 android:id="@+id/game_over_btn"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
+                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Encerrar Partida" />

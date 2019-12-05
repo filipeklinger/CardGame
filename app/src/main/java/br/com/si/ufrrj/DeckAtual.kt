@@ -30,8 +30,7 @@ class DeckAtual : AppCompatActivity() {
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         deckAtualList.layoutManager = layoutManager
         //otimizando list to scrool smootly
-        deckAtualList.setHasFixedSize(true)
-        deckAtualList.setItemViewCacheSize(10)
+        deckAtualList.setItemViewCacheSize(3)
         //inserindo dados na lista
         var adapter = CartaAdapter(this,UserStatus.deckAtual)
 
