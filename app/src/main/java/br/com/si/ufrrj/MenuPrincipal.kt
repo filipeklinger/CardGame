@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.room.Room
 import br.com.si.ufrrj.database.AppDatabase
 import br.com.si.ufrrj.gamePlay.LoadGame
+import br.com.si.ufrrj.logica.UserStatus
 
 class MenuPrincipal : AppCompatActivity() {
 
@@ -23,9 +24,14 @@ class MenuPrincipal : AppCompatActivity() {
         //setando os clicaveis do botao
 
         btnJogar.setOnClickListener {
-            Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show()
-            val intent = Intent(this,LoadGame::class.java)
-            startActivity(intent)
+            if(UserStatus.deckAtual.size == 5){
+                Toast.makeText(this,"Iniciando...",Toast.LENGTH_LONG).show()
+                val intent = Intent(this,LoadGame::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this,"É necessário ter 5 cartas no deck",Toast.LENGTH_LONG).show()
+            }
+
         }
         btnDeck.setOnClickListener {
             val intent = Intent(this,DeckMenu::class.java)

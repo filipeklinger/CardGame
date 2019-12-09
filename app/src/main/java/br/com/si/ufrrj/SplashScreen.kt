@@ -113,7 +113,8 @@ class SplashScreen : AppCompatActivity() {
             while (cartasBaixadas.isNotEmpty()){
                 var strcard = cartasBaixadas.pop()
                 var singleCard = ApiConect.parseResponse(strcard)
-                usr.deckAtual.add(singleCard)
+                if(usr.deckAtual.size < 5) usr.deckAtual.add(singleCard) //colocando somente 5 cartas no deck atual
+
                 usr.cartasDisponiveis.add(singleCard)
             }
             textoFeedback?.text = "Iniciando game"

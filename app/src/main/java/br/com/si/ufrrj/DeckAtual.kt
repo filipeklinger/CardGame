@@ -59,7 +59,7 @@ class DeckAtual : AppCompatActivity() {
 
     fun mostraQtd(){
         var qtdTv = findViewById<TextView>(R.id.deck_atual_qtd_cartas)
-        qtdTv.text = "${UserStatus.deckAtual.size} / 10"
+        qtdTv.text = "${UserStatus.deckAtual.size} / 5"
 
         var emptyView = findViewById<TextView>(R.id.empty_view)
         var recyclerView = findViewById<RecyclerView>(R.id.deck_atual_list)
@@ -75,7 +75,7 @@ class DeckAtual : AppCompatActivity() {
 
     fun botaoFlutuante(){
         fab.setOnClickListener { view ->
-            if(UserStatus.deckAtual.size >= 10){
+            if(UserStatus.deckAtual.size >= 5){
                 val snack = Snackbar.make(view, "Não é possivel adicionar mais cartas", Snackbar.LENGTH_LONG)
                 snack.setAction("Action", null)
                 // snackbar background color

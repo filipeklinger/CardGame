@@ -63,7 +63,7 @@ class CartasDisponiveis : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                     msg = "${singleCard.nome} Removido do deck"
                 }else{
-                    if(deckAtual.size < 10){
+                    if(deckAtual.size < 5){
                         deckAtual.add(singleCard)
                         adapter.notifyDataSetChanged()
                         msg = "${singleCard.nome} Adicionado ao deck"
