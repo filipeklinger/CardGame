@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.si.ufrrj.R
 import br.com.si.ufrrj.logica.UserStatus
+import br.com.si.ufrrj.logica.VolleySingleton
+import com.android.volley.toolbox.NetworkImageView
+import kotlinx.android.synthetic.main.carta_single.*
 
 
 //construtor primario recebe uma lista de singleCard e o contexto em que foi chamado
@@ -28,6 +31,7 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
         private val vigor: TextView = itemView.findViewById(R.id.vigor_card)
         private val poder: TextView = itemView.findViewById(R.id.poder_card)
         private val combate: TextView = itemView.findViewById(R.id.combate_card)
+        private val card_figure: NetworkImageView = itemView.findViewById(R.id.card_figure)
 
         private val addOrRemoveButton: ImageButton = itemView.findViewById(R.id.add_or_remove_card)
 
@@ -38,7 +42,7 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
             }
         }
 
-        fun bindView(card: singleCard) {
+        fun bindView(card: singleCard,context: Context) {
             //obtendo a carta da visualizacao atual
             titulo.text = card.nome
             inteligencia.text = "Inte: ${card.inteligencia}"
@@ -47,6 +51,11 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
             vigor.text = "Vigo: ${card.vigor}"
             poder.text = "Pode: ${card.poder}"
             combate.text = "Comb: ${card.combate}"
+
+            //Mostrando a imagem da Carta
+            card_figure.setDefaultImageResId(R.drawable.image_placeholder)
+            val imageLoader = VolleySingleton.getInstance(context).getImageLoader()
+            card_figure.setImageUrl(card.figura,imageLoader)
 
             if(UserStatus.deckAtual.contains(card)){//verificando se o card atual esta contido em deck
                 addOrRemoveButton.setImageResource(R.drawable.ic_remove_card)
@@ -76,7 +85,7 @@ class CartaAdapter(private val context:Context,private val cartaList: ArrayList<
      * para cada item do ReciclerView
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(cartaList[position])
+        holder.bindView(cartaList[position],context)
     }
 
     fun setChildClickListenner(clickListener: OnChildClickListener) {

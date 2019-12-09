@@ -93,7 +93,6 @@ class Jogando : AppCompatActivity() {
             //Mostrando a imagem da Carta
             card_figure.setDefaultImageResId(R.drawable.image_placeholder)
             val imageLoader = VolleySingleton.getInstance(this).getImageLoader()
-
             card_figure.setImageUrl(card.figura,imageLoader)
 
             inteligencia_card.text = "Inteligencia: ${card.inteligencia}"
