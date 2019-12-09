@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.room.Room
 import br.com.si.ufrrj.database.AppDatabase
 import br.com.si.ufrrj.gamePlay.LoadGame
 import br.com.si.ufrrj.logica.ApiConect
@@ -52,8 +51,8 @@ class MenuPrincipal : AppCompatActivity() {
 
     fun loadCardImages(){
         var apiConect = ApiConect(this)
-        var dka = UserStatus.deckAtual
-        dka.forEach { card ->
+        var cardAll = UserStatus.cartasDisponiveis
+        cardAll.forEach { card ->
             run {
                 if (card.figura.isEmpty()) {
                     apiConect.buscarImage(card.id) {
