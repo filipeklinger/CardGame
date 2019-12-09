@@ -3,9 +3,12 @@ package br.com.si.ufrrj
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.room.Room
+import br.com.si.ufrrj.database.AppDatabase
 import br.com.si.ufrrj.gamePlay.LoadGame
 
 class MenuPrincipal : AppCompatActivity() {
@@ -32,6 +35,11 @@ class MenuPrincipal : AppCompatActivity() {
             val intent = Intent(this,Instrucoes::class.java)
             startActivity(intent)
         }
+
+        //generate database
+        val db = AppDatabase.Companion
+        Log.d("banco", ""+db)
+
     }
     //Design - Immersive mode
     override fun onWindowFocusChanged(hasFocus: Boolean) {
