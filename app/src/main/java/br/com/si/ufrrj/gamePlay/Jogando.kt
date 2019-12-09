@@ -163,30 +163,30 @@ class Jogando : AppCompatActivity() {
         }
 
         //comparando atributos
-        if( atribJogador > atribOp1){
+        if( atribJogador.toInt() > atribOp1.toInt()){
             //ganhou do oponente 1
-            if(atribJogador > atribOp2){
+            if(atribJogador.toInt() > atribOp2.toInt()){
                 //ganhou do oponente 2
-                Toast.makeText(baseContext,"Sua carta Ganhou de TODOS!!",Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext,"Sua carta Ganhou de TODOS!!",Toast.LENGTH_SHORT).show()
                 gs.pontuacaoJogador += gs.pontosVitoria
             }
-        }else if( atribJogador == atribOp1 && atribJogador != 100){
+        }else if( atribJogador.toInt() == atribOp1.toInt() && atribJogador.toInt() != 100){
             //empatou com jogador 1 vamos ver qual oponente ganha
 
-            if( atribOp1 < atribOp2){ //como OP1 == Jogador entao OP2 ganha
-                Toast.makeText(baseContext,"Oponente 2 Ganhou de TODOS!!",Toast.LENGTH_LONG).show()
+            if( atribOp1.toInt() < atribOp2.toInt()){ //como OP1 == Jogador entao OP2 ganha
+                Toast.makeText(baseContext,"Oponente 2 Ganhou de TODOS!!",Toast.LENGTH_SHORT).show()
                 gs.pontuacaoOp2 += gs.pontosVitoria
             }else{
-                Toast.makeText(baseContext,"Sua carta Empatou com Oponente 1!!",Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext,"Sua carta Empatou com Oponente 1!!",Toast.LENGTH_SHORT).show()
                 gs.pontuacaoOp1 += gs.pontosEmpate
                 gs.pontuacaoJogador += gs.pontosEmpate
             }
         }else{
-            if(atribOp1 > atribOp2){
-                Toast.makeText(baseContext,"Oponente 1 Ganhou de TODOS,o card dele tem: ${atribOp1}!!",Toast.LENGTH_LONG).show()
+            if(atribOp1.toInt() > atribOp2.toInt()){
+                Toast.makeText(baseContext,"Oponente 1 Ganhou de TODOS,o card dele tem: ${atribOp1}!!",Toast.LENGTH_SHORT).show()
                 gs.pontuacaoOp1 += gs.pontosVitoria
             }else{
-                Toast.makeText(baseContext,"Opoente 2 Ganhou de todos, o card dele tem: ${atribOp2}!!",Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext,"Opoente 2 Ganhou de todos, o card dele tem: ${atribOp2}!!",Toast.LENGTH_SHORT).show()
                 gs.pontuacaoOp2 += gs.pontosVitoria
             }
         }
