@@ -52,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:visibility="visible"
             android:layout_margin="50dp" />
 
         <TextView
@@ -63,6 +64,16 @@
             android:text="Fim de Jogo"
             android:textSize="35sp"
             android:visibility="gone" />
+        <TextView
+            android:id="@+id/ganhador_text"
+            android:layout_below="@id/game_over_text"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:text="Jogador Ganhou"/>
 
         <TextView
             android:id="@+id/label_jogador_pts"

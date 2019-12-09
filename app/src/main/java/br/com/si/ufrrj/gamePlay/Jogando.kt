@@ -132,10 +132,25 @@ class Jogando : AppCompatActivity() {
             }
 
         }else{
-            card_principal.visibility = View.GONE
-            game_over_text.visibility = View.VISIBLE
+            gameOver(gs)
         }
 
+    }
+
+    fun gameOver(gs: GameStatus){
+        card_principal.visibility = View.GONE
+        game_over_text.visibility = View.VISIBLE
+
+        ganhador_text.visibility = View.VISIBLE
+        if(gs.pontuacaoJogador > gs.pontuacaoOp1 && gs.pontuacaoJogador > gs.pontuacaoOp2){
+            ganhador_text.text = "Jogador Ganhou"
+        }else if(gs.pontuacaoOp1 > gs.pontuacaoJogador && gs.pontuacaoOp1 > gs.pontuacaoOp2){
+            ganhador_text.text = "Oponente 1 Ganhou"
+        }else if(gs.pontuacaoOp2 > gs.pontuacaoJogador && gs.pontuacaoOp2 > gs.pontuacaoOp1){
+            ganhador_text.text = "Oponente 2 Ganhou"
+        }else{
+            ganhador_text.text = "Hum, parece que temos um Empate"
+        }
     }
 
     fun comparar(jogadorCard:singleCard, atributo: KProperty1<singleCard, *>){
