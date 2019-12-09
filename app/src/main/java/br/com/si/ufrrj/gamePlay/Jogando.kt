@@ -76,15 +76,15 @@ class Jogando : AppCompatActivity() {
     }
 
     fun mostraCarta(){
-        val gameStatus = GameStatus.getPartida()
+        val gs = GameStatus.getPartida()
         //primeiro removendo esse botao q nao tem nada a ver aparecer aqui
         add_or_remove_card.visibility = View.GONE
 
         card_principal.animation = AnimationUtils.loadAnimation(this,R.anim.lefttoright)
         //obtendo a primeira carta da pilha
-        if(!gameStatus.cardsJogador.empty()){
+        if(!gs.cardsJogador.empty()){
             //if(gameStatus.cardsJogador.size == 1) Toast.makeText(baseContext,"Ultima carta",Toast.LENGTH_LONG).show()
-            val card = gameStatus.cardsJogador.pop()
+            val card = gs.cardsJogador.pop()
 
             //setando os atributos do card atual para visao do usuario
             titulo_card.text = card.nome
