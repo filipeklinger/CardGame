@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.room.Room
 import br.com.si.ufrrj.database.AppDatabase
 import br.com.si.ufrrj.gamePlay.LoadGame
+import br.com.si.ufrrj.logica.ApiConect
 import br.com.si.ufrrj.logica.UserStatus
 
 class MenuPrincipal : AppCompatActivity() {
@@ -45,7 +46,22 @@ class MenuPrincipal : AppCompatActivity() {
         //generate database
         val db = AppDatabase.Companion
         Log.d("banco", ""+db)
+        loadCardImages()
 
+    }
+
+    fun loadCardImages(){
+        var apiConect = ApiConect(this)
+        var dka = UserStatus.deckAtual
+        dka.forEach { card ->
+            run {
+                if (card.figura.isEmpty()) {
+                    apiConect.buscarImage(card.id) {
+                        card.figura = it!!
+                    }
+                }
+            }
+        }
     }
     //Design - Immersive mode
     override fun onWindowFocusChanged(hasFocus: Boolean) {

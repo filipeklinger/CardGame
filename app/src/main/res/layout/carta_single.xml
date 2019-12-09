@@ -47,7 +47,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             />
-        <ImageView
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/card_figure"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -66,6 +66,7 @@
             android:id="@+id/forca_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:layout_marginBottom="10dp"
             android:text="@string/ph_strength"
             />
@@ -74,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:padding="3dp"
             android:text="@string/ph_speed"
             />
         <TextView
@@ -81,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:padding="3dp"
             android:text="@string/ph_knowlodge"
             />
         <TextView
@@ -88,12 +91,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:padding="3dp"
             android:text="@string/ph_pwr"
             />
         <TextView
             android:id="@+id/vigor_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:layout_marginBottom="10dp"
             android:text="@string/ph_health"
             />
@@ -101,6 +106,7 @@
             android:id="@+id/combate_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:layout_marginBottom="10dp"
             android:text="Combate:"
             />

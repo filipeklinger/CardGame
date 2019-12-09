@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible"
-            android:layout_margin="50dp" />
+            android:layout_margin="30dp" />
 
         <TextView
             android:id="@+id/game_over_text"

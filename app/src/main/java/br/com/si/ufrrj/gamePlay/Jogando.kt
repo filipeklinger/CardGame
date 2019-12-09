@@ -10,6 +10,7 @@ import android.widget.Toast
 import br.com.si.ufrrj.R
 import br.com.si.ufrrj.carta.singleCard
 import br.com.si.ufrrj.logica.GameStatus
+import br.com.si.ufrrj.logica.VolleySingleton
 import kotlinx.android.synthetic.main.activity_jogando.*
 import kotlinx.android.synthetic.main.carta_single.*
 import kotlin.reflect.KProperty1
@@ -89,6 +90,12 @@ class Jogando : AppCompatActivity() {
             //setando os atributos do card atual para visao do usuario
             titulo_card.text = card.nome
 
+            //Mostrando a imagem da Carta
+            card_figure.setDefaultImageResId(R.drawable.image_placeholder)
+            val imageLoader = VolleySingleton.getInstance(this).getImageLoader()
+
+            card_figure.setImageUrl(card.figura,imageLoader)
+
             inteligencia_card.text = "Inteligencia: ${card.inteligencia}"
             inteligencia_card.background = getDrawable(R.color.colorAccent)
             inteligencia_card.setOnClickListener{
@@ -136,6 +143,7 @@ class Jogando : AppCompatActivity() {
         }
 
     }
+
 
     fun gameOver(gs: GameStatus){
         card_principal.visibility = View.GONE

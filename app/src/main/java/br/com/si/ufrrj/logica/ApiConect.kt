@@ -80,4 +80,39 @@ class ApiConect(var context: Context){
 
     }
 
+    /**
+     * retorna a Url do card Dado um Id
+     * @callback String
+     */
+    fun buscarImage(id: Int, callback: (result: String?) -> Unit){
+        val url = apiBase + "${id}/image"
+
+        // Volley request
+        val request = JsonObjectRequest(
+            Request.Method.GET,url,null,
+            Response.Listener { response ->
+                try {
+                    callback.invoke(response.getString("url"))
+                }catch (e:Exception){
+                    Log.d(tag,"Erro ${e}!!")
+                    callback.invoke("-1")
+                }
+            }, Response.ErrorListener{
+                // Error in request
+                Log.d(tag,"Resposta ERRO!!")
+                callback.invoke("-1")
+            })
+
+        // Volley request policy, only one time request to avoid duplicate transaction
+        request.retryPolicy = DefaultRetryPolicy(
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+            // 0 means no retry
+            0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+            1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
+
+        // Add the volley post request to the request queue
+        VolleySingleton.getInstance(context).addToRequestQueue(request)
+    }
+
 }
